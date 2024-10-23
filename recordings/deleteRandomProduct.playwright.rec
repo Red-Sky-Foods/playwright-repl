@@ -1,0 +1,6 @@
+[
+  "getByRole('link', { name: \"Products\"}).click()",
+  "getByRole('table').getByRole('link').first().click()",
+  "getByRole('button', { name: \"Delete\"}).click()",
+  "getByRole('dialog').getByRole('button', { name: \"Delete\"}).click()"
+]

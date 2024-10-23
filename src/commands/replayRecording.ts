@@ -6,17 +6,15 @@ const replayRecording = async (scope: any) => {
     console.log("not recording");
   } else {
     const { sequence } = state.isRecording;
-    for (let step of sequence) {
-      await scope.context.locator("body", { timeout: 1000 }).click();
+    await scope.context.locator("body", { timeout: 1000 }).click();
 
-      for (let step of sequence) {
-        try {
-          const func = new Function(`this.${step}`).bind(scope.context);
-          await func();
-          await sleep(100);
-        } catch (ex) {
-          console.log(ex);
-        }
+    for (let step of sequence) {
+      try {
+        const func = new Function("scope", `with (scope) { ${step} }`);
+        await func(scope.context);
+        await sleep(100);
+      } catch (ex) {
+        console.log(ex);
       }
     }
   }

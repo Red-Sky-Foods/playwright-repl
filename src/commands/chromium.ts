@@ -1,6 +1,7 @@
 import { chromium, expect } from "@playwright/test";
 import options from "../options.ts";
 import initializeBrowser from "../initializeBrowser.ts";
+import createCustomExpect from "../createCustomExpect.ts";
 
 const chromiumAction = async (scope: any, replServer: any) => {
   scope.clearBufferedCommand();
@@ -13,7 +14,7 @@ const chromiumAction = async (scope: any, replServer: any) => {
   scope.context.getByRole = page.getByRole;
   scope.context.getByPlaceholder = page.getByPlaceholder;
   scope.context.getByText = page.getByText;
-  scope.context.expect = expect;
+  scope.context.expect = createCustomExpect(scope, expect);
 
   replServer.commands.load.action.apply(replServer, []);
 

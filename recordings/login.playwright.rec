@@ -1,5 +1,7 @@
 [
+  "expect(getByRole('heading', { name: 'Log in' })).toBeVisible()",
   "getByLabel('Email*').fill('dev@redsky.io')",
   "getByLabel('Password*').fill('secret')",
-  "getByRole('button', { name: \"Continue\"}).click()"
+  "getByRole('button', { name: \"Continue\"}).click()",
+  "expect(getByRole('link', { name: 'Invoices' })).toBeVisible()"
 ]

@@ -2,6 +2,7 @@ import getVisibleElements from "../getVisibleElements.ts";
 import chromiumAction from "./chromium.ts";
 import clickAction from "./click.ts";
 import copyAction from "./copyAction.ts";
+import expectAction from "./expect.ts";
 import fillAction from "./fill.ts";
 import listAction from "./list.ts";
 import loadRecordings from "./loadRecordings.ts";
@@ -102,6 +103,13 @@ const loadReplCommands = (replServer: any) => {
     help: "Copy the steps of a recording into e2e test format",
     action(name: string) {
       return copyAction(this, name);
+    },
+  });
+
+  replServer.defineCommand("expect", {
+    help: "Create a custom expect function",
+    action(argumentsString: string) {
+      return expectAction(this, argumentsString);
     },
   });
 };

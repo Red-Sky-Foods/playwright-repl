@@ -5,12 +5,14 @@ export type Recording = {
 
 type DefaultState = {
   isRecording: false | Recording;
+  inExpect: boolean;
   records: Recording[];
 };
 
 const defaultState: DefaultState = {
   isRecording: false,
   records: [],
+  inExpect: false,
 };
 
 const state = Object.assign({}, defaultState);

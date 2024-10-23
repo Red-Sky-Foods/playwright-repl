@@ -11,8 +11,9 @@ const playRecording = async (scope: any, name: string) => {
 
     for (let step of sequence) {
       try {
-        const func = new Function(`this.${step}`).bind(scope.context);
-        await func();
+        const func = new Function("scope", `with (scope) { ${step} }`);
+
+        await func(scope.context);
         await sleep(100);
       } catch (ex) {
         console.log(ex);

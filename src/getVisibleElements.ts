@@ -13,7 +13,7 @@ const getVisibleElements = async (page: any, options = { silent: false }) => {
     };
 
     const isVisible = (element: any) => {
-      // @ts-expect-error - TS doesn't know about these properties
+      // @ts-ignore
       const style = window.getComputedStyle(element);
       return (
         style.display !== "none" &&
@@ -25,7 +25,17 @@ const getVisibleElements = async (page: any, options = { silent: false }) => {
     };
 
     const determineSelectorMethod = (element: any) => {
-      // Consider labels with a "for" attribute
+      if (element.tagName.startsWith("H") && element.tagName.length === 2) {
+        return [
+          "getByRole",
+          `heading, { name: '${element.innerText.trim()}' }`,
+        ];
+      }
+
+      if (element.tagName === "A" && element.innerText.trim().length > 0) {
+        return ["getByRole", `link, { name: '${element.innerText.trim()}' }`];
+      }
+
       if (
         element.tagName === "LABEL" &&
         element.hasAttribute("for") &&
@@ -58,39 +68,18 @@ const getVisibleElements = async (page: any, options = { silent: false }) => {
             `radio, { name: '${element.innerText.trim()}' }`,
           ];
         }
-        return [
-          "getByRole",
-          `textbox, { name: '${element.getAttribute("aria-label") || element.innerText.trim()}' }`,
-        ];
+        return ["querySelector", `input[type="${inputType}"]`];
       }
 
-      if (element.tagName === "TEXTAREA") {
-        return [
-          "getByRole",
-          `textbox, { name: '${element.getAttribute("aria-label") || element.innerText.trim()}' }`,
-        ];
+      if (
+        element.tagName === "TEXTAREA" &&
+        element.hasAttribute("aria-label")
+      ) {
+        return ["getByLabel", element.getAttribute("aria-label")];
       }
 
-      if (element.tagName === "SELECT") {
-        return [
-          "getByRole",
-          `combobox, { name: '${element.getAttribute("aria-label") || element.innerText.trim()}' }`,
-        ];
-      }
-
-      if (element.tagName === "A" && element.innerText.trim().length > 0) {
-        return ["getByRole", `link, { name: '${element.innerText.trim()}' }`];
-      }
-
-      if (element.hasAttribute("role")) {
-        return [
-          "getByRole",
-          `${element.getAttribute("role")}, { name: '${element.innerText.trim()}' }`,
-        ];
-      }
-
-      if (element.hasAttribute("data-testid")) {
-        return ["getByTestId", element.getAttribute("data-testid")];
+      if (element.tagName === "SELECT" && element.hasAttribute("aria-label")) {
+        return ["getByLabel", element.getAttribute("aria-label")];
       }
 
       if (element.innerText && element.innerText.trim().length > 0) {
@@ -100,7 +89,7 @@ const getVisibleElements = async (page: any, options = { silent: false }) => {
       return ["querySelector", element.tagName.toLowerCase()];
     };
 
-    // @ts-expect-error - TS doesn't know about these properties
+    // @ts-ignore
     const elements = document.querySelectorAll("*");
     const interactiveElements: any[] = [];
     const staticElements: any[] = [];

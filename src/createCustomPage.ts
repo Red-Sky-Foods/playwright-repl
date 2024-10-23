@@ -28,11 +28,22 @@ const handleRecordableMethods =
       selectorValue: args[0],
       selectorOptions: args[1],
     };
-    if (!currentCommandChain) {
-      currentCommandChain = [commandForChain];
-    } else {
-      currentCommandChain.push(commandForChain);
-    }
+
+    setTimeout(() => {
+      if (!state.inExpect) {
+        if (!currentCommandChain) {
+          currentCommandChain = [commandForChain];
+        } else {
+          currentCommandChain.push(commandForChain);
+        }
+      }
+
+      // if we are chained in an expect, we wan't to skip persisting this command
+      if (state.inExpect) {
+        currentCommandChain = false;
+      }
+    }, 1);
+
     const element = target[prop](...args);
 
     return createCustomElement(element);
@@ -79,36 +90,42 @@ const createCustomElement = (element: any) => {
             interactiveMethodArgs: args,
           };
 
-          if (currentCommandChain) {
-            currentCommandChain.push(commandForChain);
-          }
+          setTimeout(() => {
+            if (currentCommandChain && !state.inExpect) {
+              currentCommandChain.push(commandForChain);
+            }
 
-          // this is the moment the current command chain is complete and we can save the commandChain to the current recording
-          // console.log(currentCommandChain);
-          if (state.isRecording && currentCommandChain) {
-            // build up the whole command
-            const sequenceCommand = currentCommandChain.reduce(
-              // @ts-expect-error TODO: fix
-              (acc: string, command: ChainedCommand): string => {
-                if (command.selectorMethod) {
-                  return (
-                    acc +
-                    `${command.selectorMethod}('${command.selectorValue}'${command.selectorOptions ? `, ${stringifyToJsObjectString(command.selectorOptions)}` : ""})`
-                  );
-                } else if (command.interactiveMethod) {
-                  return (
-                    acc +
-                    `.${command.interactiveMethod}(${command.interactiveMethodArgs.length > 0 ? `'${command.interactiveMethodArgs[0]}'` : ""})`
-                  );
-                }
-              },
-              "",
-            );
-            state.isRecording.sequence.push(sequenceCommand);
-          }
+            // this is the moment the current command chain is complete and we can save the commandChain to the current recording
+            // console.log(currentCommandChain);
+            if (state.isRecording && currentCommandChain) {
+              // build up the whole command
+              const sequenceCommand = currentCommandChain.reduce(
+                // @ts-expect-error TODO: fix
+                (acc: string, command: ChainedCommand): string => {
+                  if (command.selectorMethod) {
+                    return (
+                      acc +
+                      `${command.selectorMethod}('${command.selectorValue}'${command.selectorOptions ? `, ${stringifyToJsObjectString(command.selectorOptions)}` : ""})`
+                    );
+                  } else if (command.interactiveMethod) {
+                    return (
+                      acc +
+                      `.${command.interactiveMethod}(${command.interactiveMethodArgs.length > 0 ? `'${command.interactiveMethodArgs[0]}'` : ""})`
+                    );
+                  }
+                },
+                "",
+              );
 
-          // reset command chain for next command
-          currentCommandChain = false;
+              // if we are chained in an expect, we wan't to skip persisting this command
+              if (!state.inExpect) {
+                state.isRecording.sequence.push(sequenceCommand);
+              }
+            }
+
+            // reset command chain for next command
+            currentCommandChain = false;
+          }, 1);
 
           return target[prop](...args);
         };

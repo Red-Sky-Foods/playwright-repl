@@ -1,0 +1,5 @@
+[
+  "getByLabel('Email*').fill('dev@redsky.io')",
+  "getByLabel('Password*').fill('secret')",
+  "getByRole('button', { name: \"Continue\"}).click()"
+]

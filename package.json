@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@faker-js/faker": "^9.0.3",
+    "commander": "^12.1.0",
     "copy-paste": "^1.5.3"
   }
 }

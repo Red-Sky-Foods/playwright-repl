@@ -1,6 +1,7 @@
 # playwright-repl
-When writing end-to-end tests with Playwright it is a time-consuming task, to find the right selector for the element you want to interact with. This is where `playwright-repl` comes in, it's a REPL that allows you to interact with a browser and find the right selector for the element you want to interact with.
-Ideally this accelerates the process of writing end-to-end tests, by providing you with the right selectors and methods to interact with the elements on the page.
+## REPL-driven E2E test development
+
+When writing end-to-end tests with Playwright, finding the right selector for the element you want to interact with can be time-consuming. This is where playwright-repl comes in. It’s a REPL that allows you to interact with a browser and identify the appropriate selectors for your target elements. Ideally, this accelerates the process of writing end-to-end tests by providing the correct selectors and methods to interact with the elements on the page.
 
 ## Get started
 ### Installation
@@ -12,7 +13,7 @@ $ npm install -g @redsky/playwright-repl
 # with bun
 $ bun add -g @redsky/playwright-repl
 ```
-Manually clone and build on your machine.
+Or manually clone and build on your machine.
 ```bash
 $ git clone https://github.com/Red-Sky-Foods/playwright-repl.git
 $ cd playwright-repl
@@ -56,7 +57,7 @@ $ ...
 .copy <name>
 ```
 
-#### Useful helpers to write selectors and methods quicker
+#### Useful helpers
 ```bash
 # Fill a form input with a given value
 .fill Email user@host.tld
@@ -67,7 +68,7 @@ $ ...
 # Expect a certain element to be visible
 .expect visible Log in
 ```
-These helpers aim to be supportive by finding the right element, e.g. when your Label in the UI is `Email*` and you type `.fill Email` it will try to find the right element for you, by making use of the output of the `.visible` command.
+These helpers aim to support you by finding the right element. For example, when your Label in the UI is `Email*` and you type `.fill Email`, it will try to locate the correct element for you by utilizing the output of the `.visible` command.
 
 #### Other than that, you can use the Playwright API directly
 ```js

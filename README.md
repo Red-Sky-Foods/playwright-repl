@@ -110,3 +110,9 @@ As in Playwright, these selectors can also be chained in the REPL: e.g. `getByRo
 - `hover` - [Playwright API](https://playwright.dev/docs/api/class-locator#locatorhover)
 - `press` - [Playwright API](https://playwright.dev/docs/api/class-locator#locatorpress)
 - `selectOption` - [Playwright API](https://playwright.dev/docs/api/class-locator#locatorselectoption)
+
+### Future ideas
+This project is still in its early stages, so there are a lot of ideas to improve it:
+- [ ] Add support for more browsers
+- [ ] Ensure continuous compatibility with Playwright's API
+- [ ] Use the REPL as a remote control for a browser by AI, to create end-to-end testing specs automatically

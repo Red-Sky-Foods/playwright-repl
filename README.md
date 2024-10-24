@@ -129,3 +129,4 @@ This project is still in its early stages, so there are a lot of ideas to improv
 - [ ] Add support for more browsers
 - [ ] Ensure continuous compatibility with Playwright's API
 - [ ] Use the REPL as a remote control for a browser by AI, to create end-to-end testing specs automatically
+- [ ] Add a way to discover continous developement breaking end-to-end tests and recommend fixes/changes to existing tests

@@ -103,27 +103,27 @@ You can also use faker to generate random data, it's already included in the REP
 
 ### Supported selectors
 - [`locator`](https://playwright.dev/docs/api/class-locator)
-- [`getByRole`](https://playwright.dev/docs/api/class-playwright#playwrightgetbyrole)
-- [`getByLabel`](https://playwright.dev/docs/api/class-playwright#playwrightgetbylabel)
-- [`getByPlaceholder`](https://playwright.dev/docs/api/class-playwright#playwrightgetbyplaceholder)
-- [`getByText`](https://playwright.dev/docs/api/class-playwright#playwrightgetbytext)
-- [`getByTestId`](https://playwright.dev/docs/api/class-playwright#playwrightgetbytestid)
+- [`getByRole`](https://playwright.dev/docs/api/class-framelocator#frame-locator-get-by-role)
+- [`getByLabel`](https://playwright.dev/docs/api/class-framelocator#frame-locator-get-by-label)
+- [`getByPlaceholder`](https://playwright.dev/docs/api/class-framelocator#frame-locator-get-by-placeholder)
+- [`getByText`](https://playwright.dev/docs/api/class-framelocator#frame-locator-get-by-text)
+- [`getByTestId`](https://playwright.dev/docs/api/class-framelocator#frame-locator-get-by-test-id)
 
 As in Playwright, these selectors can also be chained in the REPL: e.g. `getByRole('dialog').getByRole('button')`
 
 ### Supported locator filters
-- [`first`](https://playwright.dev/docs/api/class-locator#locatorfirst)
-- [`last`](https://playwright.dev/docs/api/class-locator#locatorlast)
-- [`nth`](https://playwright.dev/docs/api/class-locator#locatornth)
-- [`filter`](https://playwright.dev/docs/api/class-locator#locatorfilter)
+- [`first`](https://playwright.dev/docs/api/class-locator#locator-first)
+- [`last`](https://playwright.dev/docs/api/class-locator#locator-last)
+- [`nth`](https://playwright.dev/docs/api/class-locator#locator-nth)
+- [`filter`](https://playwright.dev/docs/api/class-locator#locator-filter)
 
 ### Supported locator methods
-- [`click`](https://playwright.dev/docs/api/class-locator#locatorclick)
-- [`fill`](https://playwright.dev/docs/api/class-locator#locatorfill)
-- [`focus`](https://playwright.dev/docs/api/class-locator#locatorfocus)
-- [`hover`](https://playwright.dev/docs/api/class-locator#locatorhover)
-- [`press`](https://playwright.dev/docs/api/class-locator#locatorpress)
-- [`selectOption`](https://playwright.dev/docs/api/class-locator#locatorselectoption)
+- [`click`](https://playwright.dev/docs/api/class-locator#locator-click)
+- [`fill`](https://playwright.dev/docs/api/class-locator#locator-fill)
+- [`focus`](https://playwright.dev/docs/api/class-locator#locator-focus)
+- [`hover`](https://playwright.dev/docs/api/class-locator#locator-hover)
+- [`press`](https://playwright.dev/docs/api/class-locator#locator-press)
+- [`selectOption`](https://playwright.dev/docs/api/class-locator#locator-select-option)
 
 ### Future ideas
 This project is still in its early stages, so there are a lot of ideas to improve it:

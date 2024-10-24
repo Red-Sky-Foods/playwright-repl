@@ -1,4 +1,4 @@
-import state from "./state.ts";
+import state from "./state";
 
 function createCustomExpect(scope: any, playwrightExpect: any) {
   // Return a Proxy that wraps the `playwrightExpect` function.

@@ -1,5 +1,5 @@
-import state from "../state.ts";
-import { sleep } from "../utils/index.ts";
+import state from "../state";
+import { sleep } from "../utils/index";
 
 const replayRecording = async (scope: any) => {
   if (!state.isRecording) {

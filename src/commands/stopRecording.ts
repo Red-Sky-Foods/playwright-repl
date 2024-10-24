@@ -1,4 +1,4 @@
-import state from "../state.ts";
+import state from "../state";
 import fs from "fs";
 
 const stopRecordingAction = (scope: any, replServer: any) => {

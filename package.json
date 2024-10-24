@@ -3,7 +3,7 @@
   "module": "src/index.ts",
   "scripts": {
     "dev": "nodemon",
-    "build": "tsc --build"
+    "build": "rm -rf ./dist && tsc --project tsconfig.json"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.4",

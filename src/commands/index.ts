@@ -1,16 +1,16 @@
-import getVisibleElements from "../getVisibleElements.ts";
-import chromiumAction from "./chromium.ts";
-import clickAction from "./click.ts";
-import copyAction from "./copyAction.ts";
-import expectAction from "./expect.ts";
-import fillAction from "./fill.ts";
-import listAction from "./list.ts";
-import loadRecordings from "./loadRecordings.ts";
-import playRecording from "./playRecording.ts";
-import recordAction from "./record.ts";
-import replayRecording from "./replayRecording.ts";
-import stopRecordingAction from "./stopRecording.ts";
-import undoAction from "./undoAction.ts";
+import getVisibleElements from "../getVisibleElements";
+import chromiumAction from "./chromium";
+import clickAction from "./click";
+import copyAction from "./copyAction";
+import expectAction from "./expect";
+import fillAction from "./fill";
+import listAction from "./list";
+import loadRecordings from "./loadRecordings";
+import playRecording from "./playRecording";
+import recordAction from "./record";
+import replayRecording from "./replayRecording";
+import stopRecordingAction from "./stopRecording";
+import undoAction from "./undoAction";
 
 const loadReplCommands = (replServer: any) => {
   replServer.defineCommand("clear", {

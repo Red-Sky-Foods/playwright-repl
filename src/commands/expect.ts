@@ -1,4 +1,4 @@
-import getVisibleElements from "../getVisibleElements.ts";
+import getVisibleElements from "../getVisibleElements";
 
 const asserterMap: Record<string, string | any> = {
   visible: "toBeVisible",

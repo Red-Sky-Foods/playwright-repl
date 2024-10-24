@@ -1,4 +1,4 @@
-import getVisibleElements from "../getVisibleElements.ts";
+import getVisibleElements from "../getVisibleElements";
 
 const clickAction = async (scope: any, argumentsString: string) => {
   const { interactiveElements } = await getVisibleElements(scope.context.page, {

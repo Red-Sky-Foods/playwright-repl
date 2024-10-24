@@ -1,7 +1,7 @@
 import { chromium, expect } from "@playwright/test";
-import options from "../options.ts";
-import initializeBrowser from "../initializeBrowser.ts";
-import createCustomExpect from "../createCustomExpect.ts";
+import options from "../options";
+import initializeBrowser from "../initializeBrowser";
+import createCustomExpect from "../createCustomExpect";
 
 const chromiumAction = async (scope: any, replServer: any) => {
   scope.clearBufferedCommand();

@@ -1,5 +1,5 @@
 import ncp from "copy-paste";
-import state from "../state.ts";
+import state from "../state";
 
 const parseSequences = (sequences: string[]) => {
   let str = "";

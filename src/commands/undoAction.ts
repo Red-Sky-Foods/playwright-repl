@@ -1,4 +1,4 @@
-import state from "../state.ts";
+import state from "../state";
 
 const undoAction = (scope: any) => {
   if (!state.isRecording) {

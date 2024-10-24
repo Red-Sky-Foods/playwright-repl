@@ -1,4 +1,4 @@
-import state from "../state.ts";
+import state from "../state";
 
 const listAction = (scope: any) => {
   if (!state.isRecording) {

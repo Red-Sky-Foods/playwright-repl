@@ -1,4 +1,4 @@
-import state, { Recording } from "../state.ts";
+import state, { Recording } from "../state";
 import fs from "fs";
 
 const loadRecordings = (scope: any) => {

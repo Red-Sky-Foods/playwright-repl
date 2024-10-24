@@ -1,6 +1,6 @@
 import { BrowserType } from "playwright-core";
 import { defineConfig } from "@playwright/test";
-import createCustomPage from "./createCustomPage.ts";
+import createCustomPage from "./createCustomPage";
 
 export type BrowserOptions = {
   url?: string;

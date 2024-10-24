@@ -1,4 +1,4 @@
-import state from "../state.ts";
+import state from "../state";
 
 const recordAction = (scope: any, name: string, replServer: any) => {
   if (!name) {

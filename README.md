@@ -38,6 +38,9 @@ playwright-repl --headed --url http://localhost:5173
 
 # replay the currently recorded steps
 .replay
+
+# copy valid javascript code of a specific recorded sequence to the clipboard
+.copy <name>
 ```
 
 #### Useful helpers to write selectors and methods quicker
@@ -54,12 +57,12 @@ playwright-repl --headed --url http://localhost:5173
 These helpers aim to be supportive by finding the right element, e.g. when your Label in the UI is `Email*` and you type `.fill Email` it will try to find the right element for you, by making use of the output of the `.visible` command.
 
 #### Other than that, you can use the Playwright API directly
-```bash
-# get all elements by role
+```js
+// get all elements by role
 getByRole('button').first().click()
 getByRole('dialog').getByRole('button').click()
 expect(getByLabel('Email').first()).toBeVisible()
-# etc.
+// etc.
 ```
 
 #### Repetitive tasks

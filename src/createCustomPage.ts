@@ -60,7 +60,14 @@ const createCustomPage = (page: any) => {
   });
 };
 
-const recordableInteractiveMethods = ["click", "fill"];
+const recordableInteractiveMethods = [
+  "click",
+  "fill",
+  "focus",
+  "hover",
+  "press",
+  "selectOption",
+];
 const nestableSelectors = ["first", "last", "nth", "filter"];
 
 function stringifyToJsObjectString(parsedObj: any) {

@@ -132,11 +132,13 @@ const getVisibleElements = async (page: any, options = { silent: false }) => {
   });
 
   if (!options.silent) {
+    console.log("Interactive elements:");
     console.table(elementsByType.interactiveElements, [
       "tagName",
       "innerText",
       "suggestedSelector",
     ]);
+    console.log("Static elements:");
     console.table(elementsByType.staticElements, [
       "tagName",
       "innerText",

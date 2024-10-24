@@ -4,20 +4,33 @@ Ideally this accelerates the process of writing end-to-end tests, by providing y
 
 ## Get started
 ### Installation
+Automatically install the package globally with npm or bun.
 ```bash
 # with npm
-npm install -g @redsky/playwright-repl
+$ npm install -g @redsky/playwright-repl
 
 # with bun
-bun add -g @redsky/playwright-repl
+$ bun add -g @redsky/playwright-repl
+```
+Manually clone and build on your machine.
+```bash
+$ git clone https://github.com/Red-Sky-Foods/playwright-repl.git
+$ cd playwright-repl
+$ bun install
+$ bun run build
+$ bun run start --headed --url=http://localhost:5173
 ```
 
 ### Usage
-#### General REPL commands
+Start REPL
 ```bash
 # start REPL
-playwright-repl --headed --url http://localhost:5173
-
+$ bun run start --headed --url=http://localhost:5173
+# TODO: add global way to start the REPL from wherever you are
+$ ...
+```
+#### General REPL commands
+```bash
 # list all available commands
 .help
 

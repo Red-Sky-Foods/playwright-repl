@@ -1,9 +1,7 @@
 import getVisibleElements from "../getVisibleElements";
 
 const clickAction = async (scope: any, argumentsString: string) => {
-  const { interactiveElements } = await getVisibleElements(scope.context.page, {
-    silent: true,
-  });
+  const { interactiveElements } = await getVisibleElements(scope.context.page);
 
   const [elementName] = argumentsString.split(" ");
 

@@ -1,3 +1,4 @@
+import { table } from "table";
 import getVisibleElements from "../getVisibleElements";
 import chromiumAction from "./chromium";
 import clickAction from "./click";
@@ -59,7 +60,28 @@ const loadReplCommands = (replServer: any) => {
   replServer.defineCommand("visible", {
     help: "Get visible elements",
     async action() {
-      await getVisibleElements(this.context.page);
+      const mapElementsToColumns = (element: any) => [
+        element.tagName,
+        element.innerText,
+        element.suggestedSelector,
+      ];
+      const { interactiveElements, staticElements } = await getVisibleElements(
+        this.context.page,
+      );
+
+      const columns = ["Element", "Text", "Suggested selector"];
+
+      const interactiveElementsTableData =
+        interactiveElements.map(mapElementsToColumns);
+      const staticElementsTableData = staticElements.map(mapElementsToColumns);
+
+      console.log("");
+      console.log("Interactive elements");
+      console.log(table([columns, ...interactiveElementsTableData]));
+
+      console.log("Static elements");
+      console.log(table([columns, ...staticElementsTableData]));
+
       this.displayPrompt();
     },
   });

@@ -8,9 +8,6 @@ const asserterMap: Record<string, string | any> = {
 const expectAction = async (scope: any, argumentsString: string) => {
   const { interactiveElements, staticElements } = await getVisibleElements(
     scope.context.page,
-    {
-      silent: true,
-    },
   );
 
   const [asserter] = argumentsString.split(" ");

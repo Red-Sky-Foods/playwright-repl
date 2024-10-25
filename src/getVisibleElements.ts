@@ -1,4 +1,4 @@
-const getVisibleElements = async (page: any, options = { silent: false }) => {
+const getVisibleElements = async (page: any) => {
   const elementsByType = await page.evaluate(() => {
     const isInteractive = (element: any) => {
       const interactiveTags = [
@@ -130,21 +130,6 @@ const getVisibleElements = async (page: any, options = { silent: false }) => {
 
     return { interactiveElements, staticElements };
   });
-
-  if (!options.silent) {
-    console.log("Interactive elements:");
-    console.table(elementsByType.interactiveElements, [
-      "tagName",
-      "innerText",
-      "suggestedSelector",
-    ]);
-    console.log("Static elements:");
-    console.table(elementsByType.staticElements, [
-      "tagName",
-      "innerText",
-      "suggestedSelector",
-    ]);
-  }
 
   return elementsByType;
 };

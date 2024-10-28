@@ -2,6 +2,7 @@ import { chromium, expect } from "@playwright/test";
 import options from "../options";
 import initializeBrowser from "../initializeBrowser";
 import createCustomExpect from "../createCustomExpect";
+import { faker } from "@faker-js/faker";
 
 const chromiumAction = async (scope: any, replServer: any) => {
   scope.clearBufferedCommand();
@@ -15,6 +16,7 @@ const chromiumAction = async (scope: any, replServer: any) => {
   scope.context.getByPlaceholder = page.getByPlaceholder;
   scope.context.getByText = page.getByText;
   scope.context.expect = createCustomExpect(scope, expect);
+  scope.context.faker = faker;
 
   replServer.commands.load.action.apply(replServer, []);
 

@@ -12,6 +12,7 @@ import recordAction from "./record";
 import replayRecording from "./replayRecording";
 import stopRecordingAction from "./stopRecording";
 import undoAction from "./undoAction";
+import { discoverAction } from "./discoverAction";
 
 const loadReplCommands = (replServer: any) => {
   replServer.defineCommand("clear", {
@@ -59,7 +60,7 @@ const loadReplCommands = (replServer: any) => {
 
   replServer.defineCommand("visible", {
     help: "Get visible elements",
-    async action() {
+    async action(type: string) {
       const mapElementsToColumns = (element: any) => [
         element.tagName,
         element.innerText,
@@ -69,18 +70,36 @@ const loadReplCommands = (replServer: any) => {
         this.context.page,
       );
 
-      const columns = ["Element", "Text", "Suggested selector"];
+      if (type.startsWith("json")) {
+        console.log("[ tagName, innerText, suggestedSelector ]");
+        if (type.includes("interactive")) {
+          console.log(
+            JSON.stringify(interactiveElements.map(mapElementsToColumns)),
+          );
+        } else {
+          console.log(
+            JSON.stringify({
+              interactiveElements:
+                interactiveElements.map(mapElementsToColumns),
+              staticElements: staticElements.map(mapElementsToColumns),
+            }),
+          );
+        }
+      } else {
+        const columns = ["Element", "Text", "Suggested selector"];
 
-      const interactiveElementsTableData =
-        interactiveElements.map(mapElementsToColumns);
-      const staticElementsTableData = staticElements.map(mapElementsToColumns);
+        const interactiveElementsTableData =
+          interactiveElements.map(mapElementsToColumns);
+        const staticElementsTableData =
+          staticElements.map(mapElementsToColumns);
 
-      console.log("");
-      console.log("Interactive elements");
-      console.log(table([columns, ...interactiveElementsTableData]));
+        console.log("");
+        console.log("Interactive elements");
+        console.log(table([columns, ...interactiveElementsTableData]));
 
-      console.log("Static elements");
-      console.log(table([columns, ...staticElementsTableData]));
+        console.log("Static elements");
+        console.log(table([columns, ...staticElementsTableData]));
+      }
 
       this.displayPrompt();
     },
@@ -132,6 +151,13 @@ const loadReplCommands = (replServer: any) => {
     help: "Create a custom expect function",
     action(argumentsString: string) {
       return expectAction(this, argumentsString);
+    },
+  });
+
+  replServer.defineCommand("discover", {
+    help: "Discover the app to test",
+    action(argumentssString: string) {
+      return discoverAction(this, argumentssString);
     },
   });
 };

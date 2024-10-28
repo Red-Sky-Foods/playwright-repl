@@ -8,7 +8,7 @@ program.parse();
 
 const opts = program.opts();
 const { headed, timeout } = opts;
-const DEFAULT_TIMEOUT = 1000;
+const DEFAULT_TIMEOUT = 30000;
 const options: BrowserOptions = {
   headed,
   timeout: timeout ?? DEFAULT_TIMEOUT,

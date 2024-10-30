@@ -5,7 +5,11 @@ const parseSequences = (sequences: string[]) => {
   let str = "";
 
   sequences.forEach((sequence) => {
-    str += `await ${sequence};\n`;
+    if (sequence.startsWith("expect")) {
+      str += `await ${sequence};\n`;
+    } else {
+      str += `await page.${sequence};\n`;
+    }
   });
 
   return str;

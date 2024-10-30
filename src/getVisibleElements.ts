@@ -28,12 +28,12 @@ const getVisibleElements = async (page: any) => {
       if (element.tagName.startsWith("H") && element.tagName.length === 2) {
         return [
           "getByRole",
-          `heading, { name: '${element.innerText.trim()}' }`,
+          `heading', { name: '${element.innerText.trim()}' }`,
         ];
       }
 
       if (element.tagName === "A" && element.innerText.trim().length > 0) {
-        return ["getByRole", `link, { name: '${element.innerText.trim()}' }`];
+        return ["getByRole", `link', { name: '${element.innerText.trim()}' }`];
       }
 
       if (
@@ -45,7 +45,10 @@ const getVisibleElements = async (page: any) => {
       }
 
       if (element.tagName === "BUTTON" && element.innerText.trim().length > 0) {
-        return ["getByRole", `button, { name: '${element.innerText.trim()}' }`];
+        return [
+          "getByRole",
+          `button', { name: '${element.innerText.trim()}' }`,
+        ];
       }
 
       if (element.tagName === "INPUT") {
@@ -59,13 +62,13 @@ const getVisibleElements = async (page: any) => {
         if (inputType === "checkbox") {
           return [
             "getByRole",
-            `checkbox, { name: '${element.innerText.trim()}' }`,
+            `checkbox', { name: '${element.innerText.trim()}' }`,
           ];
         }
         if (inputType === "radio") {
           return [
             "getByRole",
-            `radio, { name: '${element.innerText.trim()}' }`,
+            `radio', { name: '${element.innerText.trim()}' }`,
           ];
         }
         return ["querySelector", `input[type="${inputType}"]`];
@@ -109,7 +112,7 @@ const getVisibleElements = async (page: any) => {
           classes: element.className,
           id: element.id,
           innerText: element.innerText,
-          suggestedSelector: `${selectorMethod}('${selectorValue}')`,
+          suggestedSelector: `${selectorMethod}('${selectorValue.endsWith("}") ? selectorValue : selectorValue + "'"})`,
           selectorMethod,
           selectorValue,
         };

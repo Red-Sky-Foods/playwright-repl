@@ -1,0 +1,4 @@
+[
+  "getByTestId('overflow-menu').click()",
+  "getByRole('button').getByRole('button').getByRole('button').getByRole('menuitem', { name: \"Send invitation\"}).click()"
+]

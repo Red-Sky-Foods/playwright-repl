@@ -11,23 +11,27 @@ export type BrowserOptions = {
 const initializeBrowser = async (
   browserHandle: BrowserType,
   options: BrowserOptions,
+  storageState: any,
 ) => {
   const { headed, timeout } = options;
   const browser = await browserHandle.launch({
     headless: !headed,
     args: ["--window-position=0,0"],
   });
-  const context = await browser.newContext();
+  const context = await browser.newContext({
+    storageState,
+    baseURL: options.url,
+  });
 
   // ! important, here we create the proxies over the selectors and the methods
   const page = createCustomPage(await context.newPage());
-
   page.setViewportSize({ width: 1280, height: 1024 });
-
   page.setDefaultTimeout(parseInt(timeout));
+
   if (options.url) {
     await page.goto(options.url);
     defineConfig({
+      timeout: 500,
       use: {
         baseURL: options.url,
       },

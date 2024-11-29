@@ -132,3 +132,18 @@ This project is still in its early stages, so there are a lot of ideas to improv
 - [ ] Use the REPL as a remote control for a browser by AI, to create end-to-end testing specs automatically
 - [ ] Add a way to discover continous developement breaking end-to-end tests and recommend fixes/changes to existing tests
 - [ ] Connect with IDE (maybe using Replete?) to evaluate selectors and methods on the fly in the IDE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#!/usr/bin/env node

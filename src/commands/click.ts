@@ -24,7 +24,7 @@ const clickAction = async (scope: any, argumentsString: string) => {
     return;
   }
 
-  const [selector, selectorOptionsRaw] = selectorValue.split(",");
+  const [selector, selectorOptionsRaw] = selectorValue.split("',");
   const options = selectorOptionsRaw
     ? eval(`() => (${selectorOptionsRaw})`)()
     : {};

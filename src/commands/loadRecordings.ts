@@ -4,6 +4,10 @@ import fs from "fs";
 const loadRecordings = (scope: any) => {
   const files = fs.readdirSync("./recordings");
   state.records = [];
+  if (files.length > 0) {
+    // console.log("");
+    // console.log("Loaded recordings:");
+  }
   files.forEach((file) => {
     const fileContent = JSON.parse(
       fs.readFileSync(`./recordings/${file}`, { encoding: "utf-8" }),
@@ -13,7 +17,7 @@ const loadRecordings = (scope: any) => {
       name,
       sequence: fileContent,
     });
-    console.log(`loaded ${file} as: ${name}`);
+    // console.log(`${name}`);
   });
 
   scope.displayPrompt();

@@ -4,14 +4,16 @@ import { BrowserOptions } from "./initializeBrowser.js";
 program.option("--headed");
 program.option("--timeout <value>", "Timeout in ms");
 program.option("--url <value>", "Load URL");
+program.option("--file <value>", "Load spec file");
 program.parse();
 
 const opts = program.opts();
-const { headed, timeout } = opts;
-const DEFAULT_TIMEOUT = 30000;
-const options: BrowserOptions = {
+const { headed, timeout, file } = opts;
+const DEFAULT_TIMEOUT = 500;
+const options: any = {
   headed,
   timeout: timeout ?? DEFAULT_TIMEOUT,
+  file,
 };
 
 if (opts.url) {

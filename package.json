@@ -1,6 +1,8 @@
 {
   "name": "playwright-repl",
-  "module": "src/index.ts",
+  "module": "es2022",
+  "main": "dist/index.js",
+  "bin": "bin/index.js",
   "scripts": {
     "dev": "nodemon",
     "build": "rm -rf ./dist && tsc --project tsconfig.json",
@@ -15,13 +17,15 @@
     "ts-node": "^10.9.2"
   },
   "peerDependencies": {
-    "typescript": "^5.6.3"
+    "typescript": "^5.7.2"
   },
   "dependencies": {
     "@faker-js/faker": "^9.0.3",
     "@playwright/test": "^1.48.1",
+    "chokidar": "^4.0.1",
     "commander": "^12.1.0",
     "copy-paste": "^1.5.3",
+    "glob": "^11.0.0",
     "table": "^6.8.2"
   }
 }

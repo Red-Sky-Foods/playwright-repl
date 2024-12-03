@@ -1,8 +1,0 @@
-[
-  "getByRole('link', { name: \"Invoices\"}).click()",
-  "getByRole('link', { name: \"INV-X\"}).click()",
-  "getByRole('link', { name: \"Edit\"}).click()",
-  "getByRole('tab', { name: \"Documents\"}).click()",
-  "locator('[id=\"documents\\[0\\]\\.type\"]').selectOption('Commercial Invoice')",
-  "getByRole('button', { name: \"Save\"}).click()"
-]

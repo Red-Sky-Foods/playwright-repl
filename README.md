@@ -37,24 +37,6 @@ $ ...
 
 # list all interactive and static elements of the current page
 .visible
-
-# record a new testing sequence, give it a good name, e.g. login when you want to test a login flow
-.record <name>
-
-# stop recording, will create a <name>.playwright.rec in the /recording folder
-.stop
-
-# list currently recorded steps during recording
-.list
-
-# undo the last recorded step (remove it from the .list)
-.undo
-
-# replay the currently recorded steps
-.replay
-
-# copy valid javascript code of a specific recorded sequence to the clipboard
-.copy <name>
 ```
 
 #### Useful helpers
@@ -77,24 +59,6 @@ getByRole('button').first().click()
 getByRole('dialog').getByRole('button').click()
 expect(getByLabel('Email').first()).toBeVisible()
 // etc.
-```
-
-#### Repetitive tasks
-When you want to test a certain flow multiple times, you can record the flow once and replay it multiple times.
-```bash
-# execute the recorded flow 5 times
-.play createRandomProduct 5
-```
-It's sometimes crucial to not fill inputs with static data, but with random data. This is why template strings are supported in the `.fill` shortcut and the playwright `.fill()` method.
-```bash
-# fill Email with a random email address, it's important to use the backticks
-.fill Email `user${Math.random()}@host.tld`
-# same as
-getByLabel('Email*').fill(`user${Math.random()}@host.tld`)
-```
-You can also use faker to generate random data, it's already included in the REPL.
-```bash
-.fill Email `${faker.internet.email()}`
 ```
 
 ## Supported Playwright environment
@@ -132,18 +96,3 @@ This project is still in its early stages, so there are a lot of ideas to improv
 - [ ] Use the REPL as a remote control for a browser by AI, to create end-to-end testing specs automatically
 - [ ] Add a way to discover continous developement breaking end-to-end tests and recommend fixes/changes to existing tests
 - [ ] Connect with IDE (maybe using Replete?) to evaluate selectors and methods on the fly in the IDE
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#!/usr/bin/env node

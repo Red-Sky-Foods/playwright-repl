@@ -10,7 +10,7 @@ const chromiumAction = async (scope: any, replServer: any) => {
 
   let page: any = null;
 
-  const test = () => {}
+  const test = () => {};
 
   test.repl = async (
     name: string,
@@ -48,12 +48,7 @@ const chromiumAction = async (scope: any, replServer: any) => {
   };
 
   scope.context.test = test;
-
-  // replServer.commands.load.action.apply(replServer, []);
-
   scope.displayPrompt();
-
-  // await playRecording(scope, "login");
 
   return scope.context;
 };

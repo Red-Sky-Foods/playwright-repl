@@ -1,7 +1,0 @@
-[
-  "getByRole('link', { name: \"Invoices\"}).click()",
-  "getByRole('link', { name: \"Create\"}).click()",
-  "getByLabel('Number*').fill('INV-X')",
-  "getByRole('select').selectOption('[object Object]')",
-  "getByRole('button', { name: \"Save\"}).click()"
-]

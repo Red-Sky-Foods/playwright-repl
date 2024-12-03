@@ -1,3 +1,0 @@
-[
-  "getByRole('table').getByRole('link').first().click()"
-]

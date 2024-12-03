@@ -1,8 +1,0 @@
-[
-  "getByRole('link', { name: \"Products\"}).click()",
-  "getByRole('link', { name: \"Create\"}).click()",
-  "getByLabel('Name*').fill('`${faker.commerce.productName()}`')",
-  "getByText('Company*').click()",
-  "getByRole('option', { name: \"Alfafrost\"}).click()",
-  "getByRole('button', { name: \"Save\"}).click()"
-]

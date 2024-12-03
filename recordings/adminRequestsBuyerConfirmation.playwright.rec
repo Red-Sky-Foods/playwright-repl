@@ -1,5 +1,0 @@
-[
-  "getByTestId('overflow-menu').click()",
-  "getByRole('menuitem', { name: \"Request buyer confirmation\"}).click()",
-  "expect(getByText('The buyer confirmation request has been sent.')).toBeVisible()"
-]

@@ -1,5 +1,3 @@
-import state from "./state";
-
 function createCustomExpect(scope: any, playwrightExpect: any) {
   // Return a Proxy that wraps the `playwrightExpect` function.
   return new Proxy(playwrightExpect, {
@@ -14,31 +12,16 @@ function createCustomExpect(scope: any, playwrightExpect: any) {
           const originalMethod = Reflect.get(target, prop, receiver);
 
           if (typeof originalMethod === "function") {
-            state.inExpect = true;
-
             return (...methodArgs: any[]) => {
-              // Custom logic before calling the method.
-              const startTime = Date.now();
-
               // Call the original method.
               const result = originalMethod(...methodArgs);
-
-              if (state.isRecording) {
-                state.isRecording.sequence.push(
-                  `expect(${args[0]}).${String(prop)}(${methodArgs.length > 0 ? `'${methodArgs[0]}'` : ""})`,
-                );
-              }
 
               // Handle async methods.
               if (result instanceof Promise) {
                 return result.finally(() => {
-                  const endTime = Date.now();
-                  state.inExpect = false;
                   scope.displayPrompt();
                 });
               } else {
-                const endTime = Date.now();
-                state.inExpect = false;
                 scope.displayPrompt();
                 return result;
               }

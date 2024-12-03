@@ -1,3 +1,0 @@
-[
-  "getByRole('button', { name: \"Logout\"}).click()"
-]

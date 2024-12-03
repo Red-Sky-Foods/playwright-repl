@@ -1,9 +1,0 @@
-[
-  "getByRole('link', { name: \"Users\"}).click()",
-  "getByRole('link', { name: \"Create\"}).click()",
-  "getByLabel('Name*').fill('`${faker.internet.userName()}`')",
-  "getByLabel('Email*').fill('`${faker.internet.email()}`')",
-  "getByText('Company').click()",
-  "getByRole('option').first().click()",
-  "getByRole('button', { name: \"Save\"}).click()"
-]

@@ -1,8 +1,0 @@
-[
-  "getByRole('link', { name: \"Companies\"}).click()",
-  "getByRole('link', { name: \"Nestle\"}).click()",
-  "getByRole('link', { name: \"Edit\"}).click()",
-  "getByLabel('Email address').fill('`${typeof(invoiceTemplate) !== 'undefined' ? invoiceTemplate.buyerEMail : 'lg+nestle@redsky.io'}`')",
-  "getByRole('button', { name: \"Save\"}).click()",
-  "expect(getByText('Company updated')).toBeVisible()"
-]

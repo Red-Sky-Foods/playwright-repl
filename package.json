@@ -1,6 +1,7 @@
 {
   "name": "playwright-repl",
   "module": "es2022",
+  "author": "®øƒ¬",
   "main": "dist/index.js",
   "bin": "bin/index.js",
   "scripts": {

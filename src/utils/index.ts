@@ -10,7 +10,16 @@ export const executeSpecContent = async (
   exportLexicalScope?: (newLexicalScope: any) => void,
 ) => {
   try {
-    const codeString = `with (context) { try { ${code} } catch (ex) { } }`;
+    const codeString = `with (context) {
+      return (
+        async () => {
+          try { ${code} }
+          catch (ex) { return ex.message }
+        }
+      )()
+    }`;
+
+    console.log(codeString);
 
     const func = new Function("context", codeString);
 
@@ -22,11 +31,11 @@ export const executeSpecContent = async (
     console.error(err);
   }
 };
-type CodeDiffResult = {
-  extractedCode: string;
-  hasContinue: boolean;
-};
 
+// type CodeDiffResult = {
+//   extractedCode: string;
+//   hasContinue: boolean;
+// };
 // export function extractNewCode(
 //   oldCode: string,
 //   newCode: string,

@@ -3,7 +3,7 @@ import options from "../options";
 import initializeBrowser from "../initializeBrowser";
 import createCustomExpect from "../createCustomExpect";
 import { faker } from "@faker-js/faker";
-import { waitUntilDefined } from "../utils";
+import { executeSpecContent, waitUntilDefined } from "../utils";
 
 const chromiumAction = async (scope: any, replServer: any) => {
   scope.clearBufferedCommand();
@@ -34,6 +34,34 @@ const chromiumAction = async (scope: any, replServer: any) => {
   test.use = async (obj: any) => {
     console.log("USE", obj);
     page = await initializeBrowser(chromium, options, obj.storageState);
+
+    await page.exposeFunction(
+      "getPossibleSelectors",
+      async (selectorLine: string) => {
+        const result = await executeSpecContent(
+          scope.context,
+          `await ${selectorLine}`,
+        );
+
+        if (result) {
+          // ex contains a string with a few playwright selector options, each line starting with 1) ... aka ... and we get the aka part
+          const akas = result
+            .split("\n")
+            .map((line: string) => {
+              const aka = line.split(" aka ");
+              if (aka[1]) {
+                return aka[1]?.trim();
+              }
+              return false;
+            })
+            .filter(Boolean);
+
+          return akas;
+        } else {
+          return [selectorLine];
+        }
+      },
+    );
 
     scope.context.page = page;
     scope.context.locator = page.locator;

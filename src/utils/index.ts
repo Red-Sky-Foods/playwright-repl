@@ -19,10 +19,13 @@ export const executeSpecContent = async (
       )()
     }`;
 
-    console.log(codeString);
+    // console.log("");
+    // console.log("---");
+    // console.log("executing code with context");
+    // console.log(codeString);
+    // console.log("---");
 
     const func = new Function("context", codeString);
-
     Object.assign(context, { exportLexicalScope });
 
     const res = await func(context);
@@ -31,81 +34,6 @@ export const executeSpecContent = async (
     console.error(err);
   }
 };
-
-// type CodeDiffResult = {
-//   extractedCode: string;
-//   hasContinue: boolean;
-// };
-// export function extractNewCode(
-//   oldCode: string,
-//   newCode: string,
-// ): CodeDiffResult {
-//   // Helper function to normalize line endings and split into lines
-//   const normalizeAndSplit = (code: string): string[] =>
-//     code.replace(/\r\n/g, "\n").split("\n");
-
-//   // Find the debugger statement position
-//   const findDebuggerPos = (lines: string[]): number =>
-//     lines.findIndex((line) => line.trim() === "debugger;");
-
-//   const oldLines: string[] = normalizeAndSplit(oldCode);
-//   const newLines: string[] = normalizeAndSplit(newCode);
-
-//   const oldDebuggerPos: number = findDebuggerPos(oldLines);
-//   const newDebuggerPos: number = findDebuggerPos(newLines);
-
-//   if (oldDebuggerPos === -1 || newDebuggerPos === -1) {
-//     throw new Error("Both code versions must contain a debugger; statement");
-//   }
-
-//   let diffStart: number = newDebuggerPos;
-//   let diffEnd: number = newLines.length;
-//   let foundMatch: boolean = false;
-//   let hasContinue: boolean = false;
-//   let continuePos: number = -1;
-
-//   // Find where the new code starts matching the old code
-//   for (let i = newDebuggerPos + 1; i < newLines.length; i++) {
-//     const newLine: string = newLines[i].trim();
-
-//     // Check for continue statement
-//     if (newLine === "continue;") {
-//       hasContinue = true;
-//       continuePos = i;
-//     }
-
-//     // Look for the first matching line in old code
-//     const matchInOld: string | undefined = oldLines
-//       .slice(oldDebuggerPos + 1)
-//       .find((oldLine) => oldLine.trim() === newLine);
-
-//     if (matchInOld && !hasContinue) {
-//       diffEnd = i;
-//       foundMatch = true;
-//       break;
-//     }
-//   }
-
-//   // If continue was found, include everything after it until next match with old code
-//   if (hasContinue) {
-//     for (let i = continuePos + 1; i < newLines.length; i++) {
-//       const newLine: string = newLines[i].trim();
-//       const matchInOld: string | undefined = oldLines
-//         .slice(oldDebuggerPos + 1)
-//         .find((oldLine) => oldLine.trim() === newLine);
-
-//       if (matchInOld) {
-//         diffEnd = i;
-//         break;
-//       }
-//     }
-//   }
-
-//   return {
-//     extractedCode: newLines.slice(diffStart, diffEnd).join("\n"),
-//     hasContinue,
-//   };
-// }
 
 export async function waitUntilDefined<T>(
   getter: () => T | null | undefined,
@@ -205,8 +133,6 @@ export function readLineFromFile(input: string): string | null {
   }
 }
 export function extractPageAction(line: string): string | null {
-  // Use a regex to extract everything starting with `page` up to but not including `.click` or `.fill`
   const match = line.match(/(page\..*?)(?=\.(?:click|fill|selectOption))/);
-  // Return the matched part or null if no match
   return match ? match[1] : null;
 }

@@ -18,7 +18,7 @@ const loadReplCommands = (replServer: any) => {
   replServer.defineCommand("chromium", {
     help: "Launch a new Chromium browser",
     action() {
-      return chromiumAction(this, replServer);
+      return chromiumAction(this);
     },
   });
 

@@ -2,7 +2,6 @@ import { BrowserType } from "playwright-core";
 import { defineConfig } from "@playwright/test";
 import createCustomPage from "./createCustomPage";
 import { readFileSync, writeFileSync } from "fs";
-import { executeSpecContent } from "./utils";
 
 export type BrowserOptions = {
   url?: string;
@@ -31,15 +30,20 @@ const initializeBrowser = async (
   page.setViewportSize({ width: 1280, height: 1024 });
   page.setDefaultTimeout(parseInt(timeout));
 
-  await page.exposeFunction("sendToPlaywright", async (data: any) => {
-    const currentContent = readFileSync(options.file, "utf-8");
-    const replacedContent = currentContent.replace(
-      "// record",
-      `// await page.${data} // ${new Date().toString()}`,
-    );
-    writeFileSync(options.file, replacedContent);
-    console.log("Received from UI:", data);
-  });
+  // whenever sendToPlaywright gets called in the frontend, we will replace the record-comment with the selector + method
+  await page.exposeFunction(
+    "sendToPlaywright",
+    async (selectorAndMethod: string) => {
+      if (selectorAndMethod) {
+        const currentContent = readFileSync(options.file, "utf-8");
+        const replacedContent = currentContent.replace(
+          "// record",
+          `// await page.${selectorAndMethod}`,
+        );
+        writeFileSync(options.file, replacedContent);
+      }
+    },
+  );
 
   if (options.url) {
     await page.goto(options.url);

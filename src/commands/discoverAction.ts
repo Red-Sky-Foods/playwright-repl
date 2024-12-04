@@ -43,11 +43,11 @@ export const discoverAction = async (
 
     const sequence = json.split("\n");
 
-    console.log("----");
+    // console.log("----");
 
     for (let step of sequence) {
       const cleanStep = sanitizeStep(step);
-      console.log("will execute", cleanStep);
+      // console.log("will execute", cleanStep);
       const func = new Function(
         "scope",
         `return (async () => {

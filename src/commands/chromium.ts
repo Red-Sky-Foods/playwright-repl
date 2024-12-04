@@ -5,7 +5,7 @@ import createCustomExpect from "../createCustomExpect";
 import { faker } from "@faker-js/faker";
 import { executeSpecContent, waitUntilDefined } from "../utils";
 
-const chromiumAction = async (scope: any, replServer: any) => {
+const chromiumAction = async (scope: any) => {
   scope.clearBufferedCommand();
 
   let page: any = null;
@@ -13,26 +13,26 @@ const chromiumAction = async (scope: any, replServer: any) => {
   const test = () => {};
 
   test.repl = async (
-    name: string,
+    _name: string,
     testFn: ({ page }: { page: any }) => void,
   ) => {
     await waitUntilDefined(() => page);
     try {
-      await testFn.apply(scope.context, [{ page }]);
+      return testFn.apply(scope.context, [{ page }]);
     } catch (ex) {
       // did not work
-      console.log(3, ex);
+      console.error(`test.repl`);
+      console.error(ex);
     }
   };
 
-  test.describe = (name: string, testFn: () => void) => {
-    console.log("");
-    console.log("DESCRIBE", { name });
-    testFn();
+  test.describe = (name: string, describeFn: () => void) => {
+    describeFn();
   };
 
   test.use = async (obj: any) => {
-    console.log("USE", obj);
+    if (page) return scope.context;
+
     page = await initializeBrowser(chromium, options, obj.storageState);
 
     await page.exposeFunction(
